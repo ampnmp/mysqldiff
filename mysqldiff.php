@@ -1,7 +1,7 @@
 <?php
 /*
 *	Mysqldiff — Identify Differences Among Database Objects
-*   Version 1.0
+*	Version 1.0
 *	Copyright (c) 2018 http://www.ampnmp.com All rights reserved.
 *	Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 *	Author: ampnmp.com <admin@ampnmp.com>, https://github.com/ampnmp/mysqldiff
@@ -316,12 +316,13 @@ function dbCompare()
         $conn = array_pop($arr_account['db'.$k]);
         $database = $_POST['database'.$k];
         $arr_dbh[$k] = new PDO('mysql:host='.$conn['host'], $conn['username'], $conn['password'], array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
-        $arr_dbh[$k]->query('USE '.$database);
+        $arr_dbh[$k]->query('USE `'.$database.'`');
         $rs = $arr_dbh[$k]->query('SHOW TABLES;');
+                
         foreach ($rs as $row) {
             $table = $row[0];
             $arr_tables[$k][] = $table;
-            $rs_create = $arr_dbh[$k]->query('SHOW CREATE TABLE '.$table);
+            $rs_create = $arr_dbh[$k]->query('SHOW CREATE TABLE `'.$table.'`');
             $sql_create = $rs_create->fetchColumn(1);            
             preg_match('/^\).*\s+ENGINE\=(\S+).*/im', $sql_create, $matches);
             $arr_tables_ext[$k][$table]['ENGINE'] = $matches[1];
@@ -331,7 +332,7 @@ function dbCompare()
             $arr_tables_ext[$k][$table]['COLLATE'] = $matches[1];			
             preg_match('/^\).*\sCOMMENT\=\'(.+)\'.*/im', $sql_create, $matches);
             $arr_tables_ext[$k][$table]['COMMENT'] = $matches[1];			
-            $rs2 = $arr_dbh[$k]->query('SHOW COLUMNS FROM '.$table);
+            $rs2 = $arr_dbh[$k]->query('SHOW COLUMNS FROM `'.$table.'`');
             foreach ($rs2 as $row2) {
                 preg_match('/^\s+`'.$row2['Field'].'`\s.*/im', $sql_create, $matches);
                 $row2['sql_lang'] = rtrim(trim($matches[0]),',');
@@ -342,7 +343,7 @@ function dbCompare()
         }      
         sort($arr_tables[$k]);        
     }
-     
+        
     $arr_diff[1] = array_diff($arr_tables[2], $arr_tables[1]);
     $arr_diff[2] = array_diff($arr_tables[1], $arr_tables[2]);
     sort($arr_diff[1]);
