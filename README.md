@@ -8,7 +8,7 @@
 还有索引的不同、字段顺序的不同。<br>
 </p>
 
-![image](https://github.com/ampnmp/mysqldiff/raw/master/screenshot1.png)   
+![image](https://github.com/ampnmp/mysqldiff/raw/master/screenshot2.png)   
     
 <h3>Contributors</h3>
 <ul><li><a href="http://www.ampnmp.com" target="_blank">AmpNmp.com</a> Team</li></ul>
