@@ -11,8 +11,8 @@
 ![image](https://github.com/ampnmp/mysqldiff/raw/master/screenshot2.png)   
 
 <p>
-还有比较视图、存储过程、触发器。以及支持SQL Server、SQLite的，
-    见独立客户端程序<a href="http://www.ampnmp.com/database-compare/" target="_blank">DatabaseCompare</a>。
+更多的功能如：比较视图、存储过程、触发器的差异，
+以及支持MS SQL Server、SQLite的，见独立客户端程序<a href="http://www.ampnmp.com/database-compare/" target="_blank">DatabaseCompare</a>。
 </p>
 
 <h3>Contributors</h3>
